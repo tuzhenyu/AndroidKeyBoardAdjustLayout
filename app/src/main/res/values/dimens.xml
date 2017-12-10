@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <dimen name="compose_message_subject_bottom_padding">6dp</dimen>
+    <dimen name="compose_message_subject_cancel_top_offset">-12dp</dimen>
+    <dimen name="compose_message_subject_cancel_left_margin">12dp</dimen>
+    <dimen name="compose_message_mms_indicator_padding_top">2dp</dimen>
+    <dimen name="compose_message_send_button_padding_right">12dp</dimen>
+    <dimen name="compose_message_text_box_padding_side">8dp</dimen>
+
+    <dimen name="compose_message_attachment_padding_sides">20dp</dimen>
+    <dimen name="compose_message_attachment_padding_topBottom">10dp</dimen>
+    <dimen name="compose_message_chips_view_max_height">133dp</dimen>
+    <dimen name="compose_message_subject_left_padding">52dp</dimen>
+    <dimen name="compose_message_subject_right_padding">64dp</dimen>
+    <dimen name="compose_message_subject_top_padding">4dp</dimen>
+</resources>
