@@ -15,4 +15,9 @@
     <dimen name="compose_message_subject_left_padding">52dp</dimen>
     <dimen name="compose_message_subject_right_padding">64dp</dimen>
     <dimen name="compose_message_subject_top_padding">4dp</dimen>
+
+    <!--虚拟导航栏的默认高度-->
+    <dimen name="reco_navigation_bar_height">48dp</dimen>
+    <!--状态栏的默认高度-->
+    <dimen name="reco_status_bar_height">24dp</dimen>
 </resources>

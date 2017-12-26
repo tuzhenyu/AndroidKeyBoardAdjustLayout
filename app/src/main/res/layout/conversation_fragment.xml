@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
     Copyright (C) 2015 The Android Open Source Project
 
     Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,42 +13,34 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<tutu.kyadjust.ImeDetectLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="1.0">
 
-    <LinearLayout
+    <!-- This FrameLayout will take all available height (excluding media picker)
+    but setting height to 0dp causes it not to shrink properly in KK, so a height of match_parent
+    works equally well -->
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical">
-        <!-- This FrameLayout will take all available height (excluding media picker)
-        but setting height to 0dp causes it not to shrink properly in KK, so a height of match_parent
-        works equally well -->
-        <FrameLayout
+        android:layout_weight="1">
+        <!-- Message list -->
+
+
+        <ListView
+            android:id="@+id/list_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" >
-            <!-- Message list -->
-            <ListView
-                android:id="@android:id/list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:listSelector="@android:color/transparent"
-                android:clipToPadding="false"
-                android:background="@android:color/holo_orange_light"
-                />
+            android:layout_height="match_parent" />
 
-        </FrameLayout>
+    </FrameLayout>
 
-        <!-- Attachments to send, compose message view, media picker. -->
-        <include layout="@layout/compose_message_view"
-            android:id="@+id/message_compose_view_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+    <!-- Attachments to send, compose message view, media picker. -->
+    <include
+        android:id="@+id/message_compose_view_container"
+        layout="@layout/compose_message_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-</LinearLayout>
+</tutu.kyadjust.ImeDetectLinearLayout>

@@ -13,112 +13,62 @@
     See the License for the specific `anguage governing permissions and
     limitations under the License.
 -->
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/message_compose_view_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingBottom="16dp"
-    android:background="@android:color/background_dark"
-    >
+    android:orientation="vertical">
 
     <!-- Note it may seem off to have the layout_weight="1" on the compose bar and attachment view
      when it's the media picker that expands, but this is correct because weight also works when
      there's not enough space.  Any views with positive weights will be shrunk to make space.
      When the media picker goes full screen, it fills the parent, leaving no room for the compose
      bar -->
-
-    <FrameLayout
-        android:id="@+id/mediapicker_container"
-        android:layout_width="match_parent"
-        android:layout_height="24dp"
-        android:layout_weight="0"
-        android:background="@color/colorAccent"
-        />
+    <!--
+        <FrameLayout
+            android:id="@+id/mediapicker_container"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_weight="0"
+            />-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:clipChildren="false"
         android:clipToPadding="false"
-        android:orientation="vertical"
-        android:paddingBottom="26dp"
-        android:background="@android:color/holo_green_light"
-        >
+        android:orientation="horizontal"
+        android:weightSum="1.0">
 
-        <View
-            android:id="@+id/top_margin"
-            android:layout_width="match_parent"
-            android:layout_height="16dp" />
+        <EditText
+            android:id="@+id/compose_message_text"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:hint="test"
+            android:imeOptions="actionSend|flagNoEnterAction|flagNoExtractUi"
+            android:textColor="@android:color/white" />
 
-        <RelativeLayout
-            android:id="@+id/subject_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipChildren="false"
-            android:clipToPadding="false"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/compose_message_subject_bottom_padding"
-            android:paddingTop="@dimen/compose_message_subject_top_padding"
-            android:visibility="gone">
+        <ImageButton
+            android:id="@+id/emo_btn"
+            android:layout_width="56dp"
+            android:layout_height="48dp"
+            android:contentDescription="@null"
+            />
 
-            <EditText
-                android:id="@+id/compose_subject_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:hint="testing..."
-                android:imeOptions="flagNoExtractUi" />
-
-            <ImageButton
-                android:id="@+id/delete_subject_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:src="@drawable/ic_remove_light"
-                android:translationY="@dimen/compose_message_subject_cancel_top_offset" />
-
-        </RelativeLayout>
-
-        <!-- Holds all views that create the actual compose box -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <!-- Contains compose message bubble and character counter for SMS which should be left
-            aligned -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <!-- Contains media button and compose message bubble whose centers should be
-                vertically aligned -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:id="@+id/compose_message_text"
-                        android:layout_width="0dp"
-                        android:layout_height="32dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:background="@android:color/holo_blue_bright"
-                        android:hint="test"
-                        android:textColor="@android:color/white"
-                        android:imeOptions="actionSend|flagNoEnterAction|flagNoExtractUi" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/fake_panel"
+        android:layout_width="match_parent"
+        android:layout_height="164dp"
+        android:text="fake panel"
+        android:textSize="32sp"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:background="@color/colorPrimary"
+        android:visibility="gone"
+        />
 
 </LinearLayout>
