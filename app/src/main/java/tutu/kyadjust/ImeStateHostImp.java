@@ -1,10 +1,11 @@
 package tutu.kyadjust;
 
+import android.graphics.Rect;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-
+git
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,8 +33,8 @@ public class ImeStateHostImp implements ImeUtil.ImeStateHost {
         mLastScreenHeight = context.getResources().getDisplayMetrics().heightPixels;
     }
 
+    private Rect outRect1 = new Rect();
     @Override
-
     public void onDisplayHeightChanged(int heightMeasureSpec) {
         int screenHeight = mContext.getResources().getDisplayMetrics().heightPixels;
 
@@ -47,7 +48,11 @@ public class ImeStateHostImp implements ImeUtil.ImeStateHost {
             screenHeight -= actionBar.getHeight();
         }
 
-        screenHeight -= BarUtil.getStatusBarHeight(mContext);
+
+        mContext.getWindow().getDecorView().getWindowVisibleDisplayFrame(outRect1);
+        int statusBarHeight = outRect1.top;
+
+        screenHeight -= statusBarHeight;
 
         final int height = View.MeasureSpec.getSize(heightMeasureSpec);
 
@@ -57,10 +62,13 @@ public class ImeStateHostImp implements ImeUtil.ImeStateHost {
 
         mImeOpen = durHeight > 100 && !BarUtil.isNavBarChange(durHeight,mContext);
 
-
         if (imeWasOpen != mImeOpen) {
             for (final ImeUtil.ImeStateObserver observer : mImeStateObservers) {
-                observer.onImeStateChanged(mImeOpen,durHeight);
+                observer.onImeStateChanged(mImeOpen ? ImeUtil.IME_STATE_OPEN : ImeUtil.IME_STATE_HIDE,durHeight);
+            }
+        }else if(mImeOpen){
+            for (final ImeUtil.ImeStateObserver observer : mImeStateObservers) {
+                observer.onImeStateChanged( ImeUtil.IME_STATE_ADJUST,durHeight);
             }
         }
     }

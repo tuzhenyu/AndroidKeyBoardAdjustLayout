@@ -11,8 +11,13 @@ public class ImeUtil {
 
     public static final String TAG = "IME";
 
+    public static final int IME_STATE_OPEN = 1;
+    public static final int IME_STATE_HIDE = 2;
+    public static final int IME_STATE_ADJUST = 3;
+
+
     public interface ImeStateObserver {
-        void onImeStateChanged(boolean imeOpen,int keyBoardHeight);
+        void onImeStateChanged(int state,int keyBoardHeight);
     }
 
     public interface ImeStateHost {
