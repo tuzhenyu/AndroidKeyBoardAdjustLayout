@@ -9,6 +9,7 @@
         android:theme="@style/AppTheme">
 
         <activity android:name="tutu.kyadjust.MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:windowSoftInputMode="adjustResize|stateHidden">
 
             <intent-filter>
@@ -17,6 +18,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <activity android:name="tutu.kyadjust.SecondActivity"/>
 
     </application>
 

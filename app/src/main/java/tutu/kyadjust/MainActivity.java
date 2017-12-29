@@ -1,6 +1,9 @@
 package tutu.kyadjust;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
+import android.os.MessageQueue;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -21,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText editText;
     ImeStateHostImp imeStateHostImp;
     View forwardBtn;
-    Runnable runnable ;
+    private boolean oldImeOpened ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,28 +35,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editText = (EditText) findViewById(R.id.compose_message_text);
         emojiBtn.setOnClickListener(this);
         forwardBtn.setOnClickListener(this);
-        runnable = new Runnable() {
+        Looper.myQueue().addIdleHandler(new MessageQueue.IdleHandler() {
             @Override
-            public void run() {
+            public boolean queueIdle() {
+                //等主线程的UI绘制完了再注册监听器
                 imeStateHostImp = new ImeStateHostImp(MainActivity.this);
                 imeStateHostImp.registerImeStateObserver(MainActivity.this);
+                return false;
             }
-        };
+        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+       if(oldImeOpened){
+           Looper.myQueue().addIdleHandler(new MessageQueue.IdleHandler() {
+               @Override
+               public boolean queueIdle() {
+                   ImeUtil.showImeKeyboard(MainActivity.this,editText);
+                   return false;
+               }
+           });
+       }
     }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if(runnable != null){
-            runnable.run();
-            runnable = null;
-        }
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        oldImeOpened = imeStateHostImp.isImeOpen();
     }
 
     @Override
@@ -83,6 +99,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
             case R.id.forward_btn:
+                Intent intent = new Intent(this,SecondActivity.class);
+                startActivity(intent);
                 break;
         }
     }

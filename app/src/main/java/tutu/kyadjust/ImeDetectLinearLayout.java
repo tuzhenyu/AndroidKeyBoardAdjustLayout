@@ -3,6 +3,7 @@ package tutu.kyadjust;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.LinearLayout;
 
 /**
@@ -28,6 +29,7 @@ public class ImeDetectLinearLayout extends LinearLayout {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
         if (measuredHeight != getMeasuredHeight() && getContext() instanceof ImeUtil.LayoutStateHost) {
+            Log.d(ImeUtil.TAG,"measuredHeight != getMeasuredHeight() ,getMeasuredHeight()  - measuredHeight = " + (getMeasuredHeight()  - measuredHeight));
              boolean needMeasure = ((ImeUtil.LayoutStateHost) getContext()).onDisplayHeightChanged(heightMeasureSpec);
              if(needMeasure){
                  super.onMeasure(widthMeasureSpec, heightMeasureSpec);
